@@ -2,8 +2,6 @@ package com.dwirandyh.alarmmanager
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.DatePicker
-import android.widget.TimePicker
 import com.dwirandyh.alarmmanager.broadcast.AlarmReceiver
 import com.dwirandyh.alarmmanager.dialog.DatePickerFragment
 import com.dwirandyh.alarmmanager.dialog.TimePickerFragment
@@ -31,11 +29,23 @@ class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
         }
 
         btn_once_time.setOnClickListener {
-            showTimeDialog()
+            showTimePicker(TIME_PICKER_ONCE_TAG)
         }
 
         btn_set_once_alarm.setOnClickListener {
             setOnceAlarm()
+        }
+
+        btn_repeating_time.setOnClickListener {
+            showTimePicker(TIME_PICKER_REPEAT_TAG)
+        }
+
+        btn_set_repeating_alarm.setOnClickListener {
+            setRepeatingAlarm()
+        }
+
+        btn_cancel_repeating_alarm.setOnClickListener {
+            cancelAlarm()
         }
 
         alarmReceiver = AlarmReceiver()
@@ -46,9 +56,9 @@ class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
         datePickerFragment.show(supportFragmentManager, DATE_PICKER_TAG)
     }
 
-    private fun showTimeDialog() {
+    private fun showTimePicker(tag: String) {
         val timePickerFragment = TimePickerFragment()
-        timePickerFragment.show(supportFragmentManager, TIME_PICKER_ONCE_TAG)
+        timePickerFragment.show(supportFragmentManager, tag)
     }
 
     private fun setOnceAlarm() {
@@ -56,13 +66,28 @@ class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
         val onceTime = tv_once_time.text.toString()
         val onceMessage = edt_once_message.text.toString()
 
-        alarmReceiver.setOnTimeAlarm(
+        alarmReceiver.setOneTimeAlarm(
             this,
             AlarmReceiver.TYPE_ONE_TIME,
             onceDate,
             onceTime,
             onceMessage
         )
+    }
+
+    private fun setRepeatingAlarm() {
+        val repeatTime = tv_repeating_time.text.toString()
+        val repeatMessage = edt_repeating_message.text.toString()
+        alarmReceiver.setRepeatingAlarm(
+            this,
+            AlarmReceiver.TYPE_REPEATING,
+            repeatTime,
+            repeatMessage
+        )
+    }
+
+    private fun cancelAlarm() {
+        alarmReceiver.cancelAlarm(this, AlarmReceiver.TYPE_REPEATING)
     }
 
     override fun onDialogDateSet(tag: String?, year: Int, month: Int, dayOfMonth: Int) {
@@ -80,6 +105,8 @@ class MainActivity : AppCompatActivity(), DatePickerFragment.DialogDateListener,
 
         if (tag == TIME_PICKER_ONCE_TAG) {
             tv_once_time.text = dateFormat.format(calendar.time)
+        } else if (tag == TIME_PICKER_REPEAT_TAG) {
+            tv_repeating_time.text = dateFormat.format(calendar.time)
         }
     }
 }
