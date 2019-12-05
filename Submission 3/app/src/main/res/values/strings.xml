@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Movie App</string>
+    <string name="movie">Movie</string>
+    <string name="tv_show">Tv Show</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="episode">Episode:</string>
+    <string name="popularity">Popularity:</string>
+    <string name="vote_count">Vote Count:</string>
+    <string name="change_language">Change Language</string>
+</resources>

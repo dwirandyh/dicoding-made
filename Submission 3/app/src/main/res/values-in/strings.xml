@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Aplikasi Film</string>
+    <string name="movie">Film</string>
+    <string name="tv_show">Acara TV</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="episode">Episode:</string>
+    <string name="popularity">Kepopuleran:</string>
+    <string name="vote_count">Jumlah Voting:</string>
+    <string name="time">Durasi:</string>
+    <string name="change_language">Ganti Bahasa</string>
+
+</resources>
