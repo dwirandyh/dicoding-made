@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation.xml"
+    app:startDestination="@id/nav_movie">
+    <fragment
+        android:id="@+id/nav_movie"
+        android:name="com.dwirandyh.movieapp.view.movie.list.MovieFragment"
+        android:label="@string/movie"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_nav_movie_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_tv_show"
+        android:name="com.dwirandyh.movieapp.view.tvshow.list.TvShowFragment"
+        android:label="@string/tv_show"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_nav_tv_show_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.dwirandyh.movieapp.view.movie.detail.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail">
+        <argument
+            android:name="movie"
+            app:argType="com.dwirandyh.movieapp.model.Movie" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowDetailFragment"
+        android:name="com.dwirandyh.movieapp.view.tvshow.detail.TvShowDetailFragment"
+        android:label="fragment_tv_show_detail"
+        tools:layout="@layout/fragment_tv_show_detail">
+        <argument
+            android:name="tvShow"
+            app:argType="com.dwirandyh.movieapp.model.TvShow" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_favorite"
+        android:name="com.dwirandyh.movieapp.view.favorite.FavoriteFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_nav_favorite_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_nav_favorite_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
+    </fragment>
+</navigation>
