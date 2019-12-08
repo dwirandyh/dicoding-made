@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">StackView Widget</string>
+    <string name="appwidget_text">Star Wars Gallery</string>
+    <string name="add_widget">Add widget</string>
+    <string name="empty_text">NO DATA</string>
+</resources>
