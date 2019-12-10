@@ -19,7 +19,7 @@ class FavoriteTvShowViewModel(application: Application) : AndroidViewModel(appli
         getFavoriteTvShows()
     }
 
-    private fun getFavoriteTvShows() {
+    fun getFavoriteTvShows() {
         viewModelScope.launch {
             val favoriteList = movieRoomDatabase.FavoriteTvShowDao().loadAllFavoriteTvShows()
             _favoriteMovies.postValue(favoriteList)

@@ -1,21 +1,25 @@
 package com.dwirandyh.movieapp.view.movie.detail
 
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.dwirandyh.movieapp.R
 import com.dwirandyh.movieapp.model.Movie
+import com.dwirandyh.movieapp.widget.FavoriteWidgetProvider
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -26,10 +30,6 @@ class MovieDetailFragment : Fragment() {
     private var isFavorite: Boolean = false
     private lateinit var movieDetailViewModel: MovieDetailViewModel
 
-
-    companion object {
-        val TAG = MovieDetailFragment::class.java.simpleName
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +101,32 @@ class MovieDetailFragment : Fragment() {
         } else {
             movieDetailViewModel.addFavorite(movie)
         }
+
+        updateWidget()
+    }
+
+    private fun updateWidget() {
+//        val manager = AppWidgetManager.getInstance(requireContext())
+//        val remoteeViews = RemoteViews(requireContext().packageName, R.layout.favorite_widget)
+//        val favoriteWidget = ComponentName(requireContext(), FavoriteWidget::class.java)
+//        remoteeViews.setTextViewText(R.id.banner_text, "Update favorite")
+//        manager.updateAppWidget(favoriteWidget, remoteeViews)
+
+//        val intent = Intent(requireContext(), FavoriteWidgetProvider::class.java)
+//        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+//        val ids: IntArray = AppWidgetManager.getInstance(requireContext().applicationContext)
+//            .getAppWidgetIds(ComponentName(requireContext().applicationContext, FavoriteWidgetProvider::class.java))
+//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+//        requireContext().sendBroadcast(intent)
+
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        val appWidgetIds = appWidgetManager.getAppWidgetIds(
+            ComponentName(
+                requireContext(),
+                FavoriteWidgetProvider::class.java
+            )
+        )
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view)
     }
 
     private fun loadPoster(posterPath: String) {

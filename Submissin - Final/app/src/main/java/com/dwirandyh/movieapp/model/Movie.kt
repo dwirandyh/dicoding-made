@@ -1,6 +1,7 @@
 package com.dwirandyh.movieapp.model
 
 
+import android.net.Uri
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,8 +10,9 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+
 @Parcelize
-@Entity(tableName = "favorite_movie")
+@Entity(tableName = Movie.TABLE_NAME)
 data class Movie(
     @PrimaryKey
     @SerializedName("id")
@@ -49,5 +51,18 @@ data class Movie(
     @SerializedName("vote_count")
     var voteCount: Int
 ) : Parcelable {
+
+    companion object {
+        const val AUTHORITY = "com.dwirandyh.movieapp"
+        const val SCHEME = "content"
+        const val TABLE_NAME = "favorite_movie"
+
+
+        val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME)
+            .authority(AUTHORITY)
+            .appendPath(TABLE_NAME)
+            .build()
+    }
+
     constructor() : this(0, "", "", arrayListOf(), "", arrayListOf(), "", "", "", 0.0, "", 0.0, 0)
 }

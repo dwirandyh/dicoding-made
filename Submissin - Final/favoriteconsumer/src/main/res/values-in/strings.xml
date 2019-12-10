@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Favorite List</string>
+    <string name="movie">Film</string>
+    <string name="tv_show">Acara TV</string>
+    <string name="favorite">Favorit</string>
+    <string name="setting">Pengaturan</string>
+
+
+    <string name="episode">Episode:</string>
+    <string name="popularity">Kepopuleran:</string>
+    <string name="vote_count">Jumlah Voting:</string>
+
+
+    <string name="search">Pencarian</string>
+    <string name="search_hint">Ketik judul…</string>
+
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="release_reminder">Pengingat Rilis Film Baru</string>
+    <string name="release_reminder_summary">Penginat untuk film yang dirilis hari ini</string>
+    <string name="daily_reminder">Pengingat Harianr</string>
+    <string name="daily_reminder_summary">Pengingat untuk kembali ke aplikasi</string>
+
+    <string name="notification_daily_reminder_text">Sudah mengecek film apa yang akan ditonton hari ini?</string>
+    <string name="notification_release_text">%1$s sudah dirilis hari ini!</string>
+
+</resources>

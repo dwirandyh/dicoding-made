@@ -1,5 +1,7 @@
 package com.dwirandyh.movieapp.model.local.dao
 
+import android.database.Cursor
+import android.net.Uri
 import androidx.room.*
 import com.dwirandyh.movieapp.model.Movie
 
@@ -17,4 +19,7 @@ interface FavoriteMovieDao {
 
     @Query("SELECT * FROM favorite_movie where id=:id")
     suspend fun getMovieById(id: Int): Movie
+
+    @Query("SELECT * FROM favorite_movie")
+    fun loadAllFavoriteMoviesCursor(): Cursor
 }

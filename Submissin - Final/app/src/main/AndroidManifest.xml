@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <permission
+        android:name="com.dwirandyh.movieapp.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.dwirandyh.movieapp.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +18,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name=".provider.FavoriteMovieProvider"
+            android:authorities="com.dwirandyh.movieapp"
+            android:exported="true"
+            android:readPermission="com.dwirandyh.movieapp.READ_DATABASE"
+            android:writePermission="com.dwirandyh.movieapp.WRITE_DATABASE" />
+
+        <receiver android:name=".widget.FavoriteWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.FavoriteWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
