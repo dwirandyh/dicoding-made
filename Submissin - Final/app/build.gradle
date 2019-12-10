@@ -75,6 +75,9 @@ dependencies {
     // Work Manager for scheduling Task
     implementation "androidx.work:work-runtime:2.2.0"
 
+    // Circle Image View
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -4,6 +4,7 @@ package com.dwirandyh.movieapp.view.movie.detail
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.dwirandyh.movieapp.R
+import com.dwirandyh.movieapp.adapter.ActorAdapter
+import com.dwirandyh.movieapp.adapter.RecommendationMovieAdapter
 import com.dwirandyh.movieapp.model.Movie
+import com.dwirandyh.movieapp.model.MovieVideo
 import com.dwirandyh.movieapp.widget.FavoriteWidgetProvider
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 
@@ -26,9 +31,11 @@ import kotlinx.android.synthetic.main.fragment_movie_detail.*
  */
 class MovieDetailFragment : Fragment() {
 
-    private lateinit var movie: Movie
-    private var isFavorite: Boolean = false
     private lateinit var movieDetailViewModel: MovieDetailViewModel
+
+    private lateinit var movie: Movie
+    private var movieTrailer: MovieVideo? = null
+    private var isFavorite: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,8 +59,20 @@ class MovieDetailFragment : Fragment() {
             arguments as Bundle
         ).movie
 
-        changeToolbarTitle(movie.title)
+        movieDetailViewModel.getMovieDetail(movie.id)
 
+
+        changeToolbarTitle(movie.title)
+        showMovieData()
+        initClickHandler()
+
+        initActorRecyclerView()
+        initRecommendationRecyclerView()
+
+        subscribeUI()
+    }
+
+    private fun showMovieData() {
         val rating = movie.voteAverage / 2
 
         tv_name.text = movie.title
@@ -61,15 +80,17 @@ class MovieDetailFragment : Fragment() {
         tv_rating.text = movie.voteAverage.toString()
         rb_rating.rating = rating.toFloat()
 
+        loadPoster(movie.posterPath)
+    }
 
+    private fun initClickHandler() {
         iv_favorite.setOnClickListener {
             addFavorite()
         }
 
-        loadPoster(movie.posterPath)
-        movieDetailViewModel.getMovieById(movie.id)
-
-        subscribeUI()
+        tv_trailer.setOnClickListener {
+            openTrailer()
+        }
     }
 
     private fun subscribeUI() {
@@ -93,6 +114,18 @@ class MovieDetailFragment : Fragment() {
                 }
             }
         })
+
+        movieDetailViewModel.movieTrailer.observe(viewLifecycleOwner, Observer {
+            movieTrailer = it
+        })
+
+        movieDetailViewModel.movieActor.observe(viewLifecycleOwner, Observer {
+            rv_actor.adapter = ActorAdapter(it)
+        })
+
+        movieDetailViewModel.recommendationMovies.observe(viewLifecycleOwner, Observer {
+            rv_recommendation.adapter = RecommendationMovieAdapter(it)
+        })
     }
 
     private fun addFavorite() {
@@ -106,19 +139,6 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun updateWidget() {
-//        val manager = AppWidgetManager.getInstance(requireContext())
-//        val remoteeViews = RemoteViews(requireContext().packageName, R.layout.favorite_widget)
-//        val favoriteWidget = ComponentName(requireContext(), FavoriteWidget::class.java)
-//        remoteeViews.setTextViewText(R.id.banner_text, "Update favorite")
-//        manager.updateAppWidget(favoriteWidget, remoteeViews)
-
-//        val intent = Intent(requireContext(), FavoriteWidgetProvider::class.java)
-//        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-//        val ids: IntArray = AppWidgetManager.getInstance(requireContext().applicationContext)
-//            .getAppWidgetIds(ComponentName(requireContext().applicationContext, FavoriteWidgetProvider::class.java))
-//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
-//        requireContext().sendBroadcast(intent)
-
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val appWidgetIds = appWidgetManager.getAppWidgetIds(
             ComponentName(
@@ -133,7 +153,27 @@ class MovieDetailFragment : Fragment() {
         Glide.with(this)
             .load("https://image.tmdb.org/t/p/w500$posterPath")
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(iv_logo)
+            .into(iv_backdrop)
+    }
+
+    private fun openTrailer() {
+        movieTrailer?.let {
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=${it.key}"))
+            startActivity(intent)
+        }
+    }
+
+    private fun initActorRecyclerView() {
+        rv_actor.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rv_actor.setHasFixedSize(true)
+    }
+
+    private fun initRecommendationRecyclerView() {
+        rv_recommendation.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rv_recommendation.setHasFixedSize(true)
     }
 
     private fun changeToolbarTitle(title: String) {

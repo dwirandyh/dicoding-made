@@ -30,5 +30,8 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="empty_text">Data is Empty</string>
+    <string name="view_trailer">View Trailer</string>
+    <string name="recommendation">Recommendation</string>
+    <string name="actor">Actor</string>
 
 </resources>

@@ -14,12 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.dwirandyh.movieapp.R
 import com.dwirandyh.movieapp.model.TvShow
-import kotlinx.android.synthetic.main.fragment_tv_show_detail.iv_favorite
-import kotlinx.android.synthetic.main.fragment_tv_show_detail.iv_logo
-import kotlinx.android.synthetic.main.fragment_tv_show_detail.rb_rating
-import kotlinx.android.synthetic.main.fragment_tv_show_detail.tv_description
-import kotlinx.android.synthetic.main.fragment_tv_show_detail.tv_name
-import kotlinx.android.synthetic.main.fragment_tv_show_detail.tv_rating
+import kotlinx.android.synthetic.main.fragment_tv_show_detail.*
 
 
 /**
@@ -110,7 +105,7 @@ class TvShowDetailFragment : Fragment() {
         Glide.with(this)
             .load("https://image.tmdb.org/t/p/w500$posterPath")
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(iv_logo)
+            .into(iv_backdrop)
     }
 
     private fun changeToolbarTitle(title: String) {

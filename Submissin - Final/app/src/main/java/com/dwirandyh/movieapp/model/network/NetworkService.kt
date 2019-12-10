@@ -16,5 +16,5 @@ object NetworkService {
         return retrofit
     }
 
-    fun movieDBApi(): MovieDBApi = retrofitService().create(MovieDBApi::class.java)
+    fun movieDBApi(): MovieEndpoint = retrofitService().create(MovieEndpoint::class.java)
 }
