@@ -1,15 +1,14 @@
 package com.dwirandyh.movieapp.model.network
 
-import com.dwirandyh.movieapp.model.network.response.MovieCreditResponse
-import com.dwirandyh.movieapp.model.network.response.MovieListResponse
-import com.dwirandyh.movieapp.model.network.response.MovieVideoResponse
 import com.dwirandyh.movieapp.model.network.response.TvListResponse
+import com.dwirandyh.movieapp.model.network.response.TvShowCreditResponse
+import com.dwirandyh.movieapp.model.network.response.TvShowVideoResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface TvEndpoint {
+interface TvShowEndpoint {
 
     @GET("discover/tv")
     fun discoverTv(
@@ -23,20 +22,20 @@ interface TvEndpoint {
     ): Call<TvListResponse>
 
     @GET("tv/{id}/videos")
-    fun getMovieVideos(
+    fun getTvShowVideos(
         @Path("id") movieId: Int,
         @Query("api_key") apiKey: String
-    ): Call<MovieVideoResponse>
+    ): Call<TvShowVideoResponse>
 
     @GET("tv/{id}/credits")
-    fun getMovieCredits(
+    fun getTvShowCredits(
         @Path("id") movieId: Int,
         @Query("api_key") apiKey: String
-    ): Call<MovieCreditResponse>
+    ): Call<TvShowCreditResponse>
 
     @GET("tv/{id}/recommendations")
-    fun getRecommendationMovie(
+    fun getRecommendationTvShow(
         @Path("id") movieId: Int,
         @Query("api_key") apiKey: String
-    ): Call<MovieListResponse>
+    ): Call<TvListResponse>
 }

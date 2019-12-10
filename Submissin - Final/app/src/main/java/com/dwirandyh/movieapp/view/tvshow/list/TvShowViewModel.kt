@@ -28,7 +28,7 @@ class TvShowViewModel : ViewModel() {
     fun discoverTv() {
         _isLoading.postValue(true)
 
-        NetworkService.movieDBApi().discoverTv(NetworkService.API_KEY)
+        NetworkService.tvShowEndpoint().discoverTv(NetworkService.API_KEY)
             .enqueue(object : Callback<TvListResponse> {
                 override fun onFailure(call: Call<TvListResponse>, t: Throwable) {
                     _isLoading.postValue(false)
@@ -53,7 +53,7 @@ class TvShowViewModel : ViewModel() {
     fun searchTv(query: String) {
         _isLoading.postValue(true)
 
-        NetworkService.movieDBApi().searchTv(NetworkService.API_KEY, query)
+        NetworkService.tvShowEndpoint().searchTv(NetworkService.API_KEY, query)
             .enqueue(object : Callback<TvListResponse> {
                 override fun onFailure(call: Call<TvListResponse>, t: Throwable) {
                     _isLoading.postValue(false)

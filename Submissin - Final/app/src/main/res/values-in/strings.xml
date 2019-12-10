@@ -23,4 +23,15 @@
     <string name="notification_daily_reminder_text">Sudah mengecek film apa yang akan ditonton hari ini?</string>
     <string name="notification_release_text">%1$s sudah dirilis hari ini!</string>
 
+    <string name="add_widget">Tambah widget</string>
+    <string name="empty_text">Data kosong</string>
+    <string name="view_trailer">Lihat Trailer</string>
+    <string name="actor">Aktor</string>
+
+    <string name="home">Beranda</string>
+    <string name="coming_soon">Segera Hadir</string>
+    <string name="recommendation">Rekomendasi</string>
+    <string name="now_playing">Sedang Tayang</string>
+    <string name="ready_to_choose_your_next_movie_list">Siap untuk memilih daftar film Anda berikutnya?</string>
+    <string name="hi_there">Hi, kamu</string>
 </resources>

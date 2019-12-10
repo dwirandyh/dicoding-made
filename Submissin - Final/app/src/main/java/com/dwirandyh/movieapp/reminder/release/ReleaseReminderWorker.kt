@@ -7,18 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.dwirandyh.movieapp.R
 import com.dwirandyh.movieapp.model.Movie
 import com.dwirandyh.movieapp.model.network.NetworkService
-import com.dwirandyh.movieapp.model.network.response.MovieListResponse
-import retrofit2.Callback
 import com.dwirandyh.movieapp.view.MainActivity
-import retrofit2.Call
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -50,7 +45,7 @@ class ReleaseReminderWorker(private val context: Context, workerParameters: Work
     private fun getMovieReleaseToday(): Result {
         val today = SimpleDateFormat("yyyy-MM-dd").format(Date())
         val response =
-            NetworkService.movieDBApi().getMovieReleasedToday(NetworkService.API_KEY, today, today)
+            NetworkService.movieEndpoint().getMovieReleasedToday(NetworkService.API_KEY, today, today)
                 .execute()
 
         if (response.isSuccessful) {

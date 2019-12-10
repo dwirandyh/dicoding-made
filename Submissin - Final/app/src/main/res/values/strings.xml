@@ -27,11 +27,17 @@
 
     <string name="notification_daily_reminder_text">Have you checked the movie to be watched today?</string>
     <string name="notification_release_text">%1$s has been released today!</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="empty_text">Data is Empty</string>
     <string name="view_trailer">View Trailer</string>
-    <string name="recommendation">Recommendation</string>
     <string name="actor">Actor</string>
+
+    <string name="home">Home</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="recommendation">Recommendation</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="ready_to_choose_your_next_movie_list">Ready to choose your next movie list?</string>
+    <string name="hi_there">Hi, there</string>
 
 </resources>

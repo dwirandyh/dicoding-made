@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation.xml"
-    app:startDestination="@id/nav_movie">
+    app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_movie"
         android:name="com.dwirandyh.movieapp.view.movie.list.MovieFragment"
@@ -30,6 +30,9 @@
         <argument
             android:name="movie"
             app:argType="com.dwirandyh.movieapp.model.Movie" />
+        <action
+            android:id="@+id/action_movieDetailFragment_self"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/tvShowDetailFragment"
@@ -39,6 +42,9 @@
         <argument
             android:name="tvShow"
             app:argType="com.dwirandyh.movieapp.model.TvShow" />
+        <action
+            android:id="@+id/action_tvShowDetailFragment_self"
+            app:destination="@id/tvShowDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_favorite"
@@ -55,5 +61,14 @@
     <fragment
         android:id="@+id/nav_setting"
         android:name="com.dwirandyh.movieapp.view.setting.SettingFragment"
-        android:label="@string/setting"/>
+        android:label="@string/setting" />
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.dwirandyh.movieapp.view.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 </navigation>

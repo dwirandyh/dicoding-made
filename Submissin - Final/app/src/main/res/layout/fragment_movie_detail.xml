@@ -140,7 +140,7 @@
                 android:layout_margin="12dp"
                 android:text="@string/actor"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -174,7 +174,7 @@
                 android:layout_margin="12dp"
                 android:text="@string/recommendation"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

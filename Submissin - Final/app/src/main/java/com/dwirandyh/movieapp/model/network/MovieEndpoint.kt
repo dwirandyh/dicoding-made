@@ -47,4 +47,15 @@ interface MovieEndpoint {
         @Path("id") movieId: Int,
         @Query("api_key") apiKey: String
     ): Call<MovieListResponse>
+
+    @GET("movie/now_playing")
+    fun getNowPlayingMovie(
+        @Query("api_key") apiKey: String
+    ): Call<MovieListResponse>
+
+    @GET("trending/movie/week")
+    fun getTrendingMovie(
+        @Query("api_key") apiKey: String
+    ): Call<MovieListResponse>
+
 }

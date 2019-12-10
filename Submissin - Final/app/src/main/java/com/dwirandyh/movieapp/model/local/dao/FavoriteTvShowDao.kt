@@ -17,5 +17,5 @@ interface FavoriteTvShowDao {
     suspend fun loadAllFavoriteTvShows(): List<TvShow>
 
     @Query("SELECT * FROM favorite_tv_show where id=:id")
-    suspend fun getMovieById(id: Int): TvShow
+    suspend fun getTvShowById(id: Int): TvShow
 }

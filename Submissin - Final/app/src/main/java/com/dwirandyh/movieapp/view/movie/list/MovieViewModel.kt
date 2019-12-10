@@ -28,7 +28,7 @@ class MovieViewModel : ViewModel() {
     fun discoverMovie() {
         _isLoading.postValue(true)
 
-        NetworkService.movieDBApi().discoverMovie(NetworkService.API_KEY)
+        NetworkService.movieEndpoint().discoverMovie(NetworkService.API_KEY)
             .enqueue(object : Callback<MovieListResponse> {
                 override fun onFailure(call: Call<MovieListResponse>, t: Throwable) {
                     _isLoading.postValue(false)
@@ -53,7 +53,7 @@ class MovieViewModel : ViewModel() {
     fun searchMovie(query: String) {
         _isLoading.postValue(false)
 
-        NetworkService.movieDBApi().searchMovie(NetworkService.API_KEY, query)
+        NetworkService.movieEndpoint().searchMovie(NetworkService.API_KEY, query)
             .enqueue(object : Callback<MovieListResponse> {
                 override fun onFailure(call: Call<MovieListResponse>, t: Throwable) {
                     _isLoading.postValue(false)

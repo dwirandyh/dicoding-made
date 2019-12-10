@@ -73,7 +73,7 @@ class MovieDetailViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private fun getMovieVideo(id: Int) {
-        NetworkService.movieDBApi().getMovieVideos(id, NetworkService.API_KEY)
+        NetworkService.movieEndpoint().getMovieVideos(id, NetworkService.API_KEY)
             .enqueue(object : Callback<MovieVideoResponse> {
                 override fun onFailure(call: Call<MovieVideoResponse>, t: Throwable) {
                     t.printStackTrace()
@@ -98,7 +98,7 @@ class MovieDetailViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private fun getMovieActor(id: Int) {
-        NetworkService.movieDBApi().getMovieCredits(id, NetworkService.API_KEY)
+        NetworkService.movieEndpoint().getMovieCredits(id, NetworkService.API_KEY)
             .enqueue(object : Callback<MovieCreditResponse> {
                 override fun onFailure(call: Call<MovieCreditResponse>, t: Throwable) {
                     t.printStackTrace()
@@ -118,7 +118,7 @@ class MovieDetailViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private fun getRecommendationMovie(id: Int) {
-        NetworkService.movieDBApi().getRecommendationMovie(id, NetworkService.API_KEY)
+        NetworkService.movieEndpoint().getRecommendationMovie(id, NetworkService.API_KEY)
             .enqueue(object : Callback<MovieListResponse> {
                 override fun onFailure(call: Call<MovieListResponse>, t: Throwable) {
                     t.printStackTrace()

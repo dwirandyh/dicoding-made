@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -23,7 +24,15 @@ import com.dwirandyh.movieapp.adapter.RecommendationMovieAdapter
 import com.dwirandyh.movieapp.model.Movie
 import com.dwirandyh.movieapp.model.MovieVideo
 import com.dwirandyh.movieapp.widget.FavoriteWidgetProvider
-import kotlinx.android.synthetic.main.fragment_movie_detail.*
+import kotlinx.android.synthetic.main.fragment_movie_detail.iv_backdrop
+import kotlinx.android.synthetic.main.fragment_movie_detail.iv_favorite
+import kotlinx.android.synthetic.main.fragment_movie_detail.rb_rating
+import kotlinx.android.synthetic.main.fragment_movie_detail.rv_actor
+import kotlinx.android.synthetic.main.fragment_movie_detail.rv_recommendation
+import kotlinx.android.synthetic.main.fragment_movie_detail.tv_description
+import kotlinx.android.synthetic.main.fragment_movie_detail.tv_name
+import kotlinx.android.synthetic.main.fragment_movie_detail.tv_rating
+import kotlinx.android.synthetic.main.fragment_movie_detail.tv_trailer
 
 
 /**
@@ -124,7 +133,11 @@ class MovieDetailFragment : Fragment() {
         })
 
         movieDetailViewModel.recommendationMovies.observe(viewLifecycleOwner, Observer {
-            rv_recommendation.adapter = RecommendationMovieAdapter(it)
+            val adapter = RecommendationMovieAdapter(it)
+            adapter.onItemClick = { movie ->
+                navigateToMovieDetail(movie)
+            }
+            rv_recommendation.adapter = adapter
         })
     }
 
@@ -178,6 +191,11 @@ class MovieDetailFragment : Fragment() {
 
     private fun changeToolbarTitle(title: String) {
         (activity as AppCompatActivity).supportActionBar?.title = title
+    }
+
+    private fun navigateToMovieDetail(movie: Movie) {
+        val directions = MovieDetailFragmentDirections.actionMovieDetailFragmentSelf(movie)
+        view?.findNavController()?.navigate(directions)
     }
 
 }
